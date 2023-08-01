@@ -25,8 +25,9 @@ from samplers.Halton import Halton_Sequence
 import re
 import shutil
 
-varying_entities = ['attack_length', 'action', 'road_segments', 'cause_density', 'sensor_faults']
-action_parameters = ['cloudiness','precipitation','precipitation_deposits','sun_altitude_angle','wind_intensity','sun_azimuth_angle','wetness','fog_distance','fog_density']
+varying_entities = ['action','cause']
+action_parameters = ['methods','preconditions']
+cause_parameters = ['influenced_element','influence']
 
 
 def write_sampler_results(route_path,folder,parameter_values,joined_parameters,data_path):
@@ -85,8 +86,12 @@ def get_distribution_values(parameter_name):
     """
     if parameter_name in attack_parameters:
         min,max = 0,100
-    elif parameter_name == "Image brightness":
-        min,max = 0,100
+    elif parameter_name == "x":
+        min,max = 0,1000
+    elif parameter_name == "y":
+        min,max = 0,1000
+    elif parameter_name == "z":
+        min,max = 0,1000
     return min, max
 
 def read_attack_parameters(attack_info,varying_attack_entities,varying_attack_parameters):
@@ -171,9 +176,9 @@ def set_attack_cause(cause_info,cause_list):
     cause = []
     for i, entry in enumerate(cause_list):
         if entry[0] == 'influenced element':
-            attack_info.entities[2].properties[0] = str(int(entry[1]))
+            attack_info.entities[3].properties[0] = str(int(entry[1]))
         elif entry[0] == 'influence':
-            attack_info.entities[2].properties[1] = str(int(entry[1]))
+            attack_info.entities[3].properties[1] = str(int(entry[1]))
     return cause
 
 def set_cause_influence(influence_info,influence_list):
@@ -183,7 +188,7 @@ def set_cause_influence(influence_info,influence_list):
     influence= []
     for i, entry in enumerate(influence_list):
         if entry[0][0] == 'Image brightness':
-           influence_info.entities[2].properties[0] = str(int(entry[1]))
+           influence_info.entities[4].properties[0] = str(int(entry[1]))
     return influence
 
 def set_attack_road_segment(global_route,road_segment):

@@ -9,10 +9,10 @@ Threat Description:
     preconditions:[precondition1 or precondition2]
       precondition1:[catagory:car, description:the attacker car drive before the victim car]
         the attacker car:
-          position:[before the victim car]
+          position:[before, the victim car]
       precondition2:[catagory:enviroment, description: laser on the roadside]
         laser:
-          position:[on the roadside]
+          position:[on, the roadside]
   cause: [influenced element, influence]
     influenced element: [catagory:sensor, name:rgb_camara_right]
     influence: [type:modified properties, description:modified image brightness]
